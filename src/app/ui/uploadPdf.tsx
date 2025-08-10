@@ -127,7 +127,7 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
             { showCountyModal && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center">
                     <div className="absolute inset-0 bg-gray-900/50" />
-                    <div className={ `relative border-orange-200 rounded-lg p-6 w-[36rem] h-[28rem] shadow-lg transition-all duration-200 ease-out z-50 ${ modalVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0' }` }>
+                    <div className={ `relative border-orange-300/25 rounded-lg p-6 w-[36rem] h-[28rem] shadow-lg transition-all duration-200 ease-out z-50 ${ modalVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0' }` }>
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-gray-900 text-2xl font-semibold">Select County</h2>
                             <button
@@ -147,7 +147,7 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
                             { counties.map( ( county ) => (
                                 <div key={ county.id }>
                                     <button
-                                        className="w-full text-gray-700 text-left p-2 text-lg hover:bg-amber-200/50 rounded"
+                                        className="w-full text-cyan-950 text-left p-2 text-lg hover:bg-amber-200/50 rounded"
                                         onClick={ () => selectCounty( county ) }
                                     >
                                         { county.county_name }
