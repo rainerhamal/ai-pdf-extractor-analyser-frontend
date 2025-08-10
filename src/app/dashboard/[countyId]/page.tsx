@@ -5,6 +5,7 @@ import UploadModal from "../../ui/uploadModal";
 import { useFileId } from "../../ui/fileIdContext";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { CountyData, Goal, BMP, Implementation, Monitoring, Outreach, GeographicArea, Summary } from "@/app/lib/definitions";
 import
 {
@@ -46,10 +47,10 @@ export default function Page ()
 
     useEffect( () =>
     {
-        fetch( `${process.env.NEXT_PUBLIC_API_URL}/api/counties/${ countyId }` )
-            .then( ( res ) => res.json() )
-            .then( ( data ) => setData( data ) )
-            .catch( ( err ) => console.error( "Error fetching county data:", err ) );
+        axios
+            .get( `${ process.env.NEXT_PUBLIC_API_URL }/api/counties/${ countyId }` )
+            .then( res => setData( res.data ) )
+            .catch( err => console.error( "Error fetching county data:", err ) );
     }, [ countyId ] );
 
     if ( !data ) return <p className="text-white">Loading...</p>;
@@ -132,13 +133,28 @@ export default function Page ()
     const implementationLabels = ( data.implementation ?? [] ).map( ( imp ) => imp.activity );
     const implementationStartYears = ( data.implementation ?? [] ).map( ( imp ) =>
     {
-        const [ start ] = imp.date.split( "-" ).map( ( y ) => parseInt( y.trim(), 10 ) );
-        return start;
+        if ( typeof imp.date === "string" && imp.date.includes( "-" ) )
+        {
+            const [ start ] = imp.date.split( "-" ).map( ( y ) => parseInt( y.trim(), 10 ) );
+            return start;
+        } else if ( typeof imp.date === "string" )
+        {
+            // Single year, no dash
+            return parseInt( imp.date.trim(), 10 );
+        }
+        return NaN;
     } );
     const implementationEndYears = ( data.implementation ?? [] ).map( ( imp ) =>
     {
-        const parts = imp.date.split( "-" );
-        return parts.length > 1 ? parseInt( parts[ 1 ].trim(), 10 ) : parseInt( parts[ 0 ].trim(), 10 );
+        if ( typeof imp.date === "string" && imp.date.includes( "-" ) )
+        {
+            const parts = imp.date.split( "-" );
+            return parseInt( parts[ 1 ].trim(), 10 );
+        } else if ( typeof imp.date === "string" )
+        {
+            return parseInt( imp.date.trim(), 10 );
+        }
+        return NaN;
     } );
 
     // Find earliest year to align bars
