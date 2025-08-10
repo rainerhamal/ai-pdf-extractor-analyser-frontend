@@ -42,8 +42,13 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
 
         try
         {
+            // const response = await axios.post(
+            //     `${ process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000" }/api/upload`,
+            //     formData,
+            //     { headers: { "Content-Type": "multipart/form-data" } }
+            // );
             const response = await axios.post(
-                `${ process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000" }/api/upload`,
+                `${process.env.NEXT_PUBLIC_API_URL}/api/upload`,
                 formData,
                 { headers: { "Content-Type": "multipart/form-data" } }
             );
