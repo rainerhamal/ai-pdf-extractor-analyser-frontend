@@ -129,7 +129,7 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
                     <div className="absolute inset-0 bg-gray-900/50" />
                     <div className={ `relative border bg-amber-100/50 rounded-lg p-6 w-[36rem] h-[28rem] shadow-lg transition-all duration-200 ease-out z-50 ${ modalVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0' }` }>
                         <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-gray-900 text-2xl font-semibold">Select County</h2>
+                            <h2 className="text-amber-600 text-2xl font-semibold">Select County</h2>
                             <button
                                 onClick={ () => setShowCountyModal( false ) }
                                 className="text-gray-900 hover:text-gray-600 focus:outline-none"
@@ -140,7 +140,7 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
                                 </svg>
                             </button>
                         </div>
-                        <p className="mb-4 text-gray-900 text-left text-lg">
+                        <p className="mb-4 text-shadow-amber-950 text-left text-lg">
                             Multiple counties were detected in the document. Please select the correct county:
                         </p>
                         <div className="overflow-y-auto max-h-[18rem]">
