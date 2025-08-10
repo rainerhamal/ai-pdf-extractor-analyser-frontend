@@ -46,7 +46,7 @@ export default function Page ()
 
     useEffect( () =>
     {
-        fetch( `${ process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000" }/api/counties/${ countyId }` )
+        fetch( `${process.env.NEXT_PUBLIC_API_URL}/api/counties/${ countyId }` )
             .then( ( res ) => res.json() )
             .then( ( data ) => setData( data ) )
             .catch( ( err ) => console.error( "Error fetching county data:", err ) );
