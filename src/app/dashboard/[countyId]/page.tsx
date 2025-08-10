@@ -273,6 +273,16 @@ export default function Page ()
                         options={ {
                             responsive: true,
                             plugins: { legend: { display: false } },
+                            scales: {
+                                x: {
+                                    grid: { color: '#fbbf24' },
+                                    ticks: { color: '#fff' },
+                                },
+                                y: {
+                                    grid: { color: '#fbbf24' },
+                                    ticks: { color: '#fff' },
+                                },
+                            },
                         } }
                     />
                 </div>
@@ -353,10 +363,12 @@ export default function Page ()
                             x: {
                                 stacked: true,
                                 ticks: { color: "#fff" },
+                                grid: { color: '#fbbf24' },
                             },
                             y: {
                                 stacked: true,
                                 ticks: { color: "#fff" },
+                                grid: { color: '#fbbf24' },
                                 beginAtZero: true,
                                 title: {
                                     display: true,
@@ -401,10 +413,12 @@ export default function Page ()
                                     color: "#fff",
                                     callback: ( value ) => `${ minYear + Number( value ) }`,
                                 },
+                                grid: { color: '#fbbf24' },
                             },
                             y: {
                                 stacked: true,
                                 ticks: { color: "#fff" },
+                                grid: { color: '#fbbf24' },
                             },
                         },
                     } }
@@ -445,6 +459,7 @@ export default function Page ()
                                         color: "#fff",
                                         font: { size: 14 },
                                     },
+                                    grid: { color: '#fbbf24' },
                                 },
                                 y: {
                                     ticks: {
@@ -471,6 +486,7 @@ export default function Page ()
                                             return lines;
                                         },
                                     },
+                                    grid: { color: '#fbbf24' },
                                 },
                             },
                         } }
@@ -496,10 +512,12 @@ export default function Page ()
                                         color: '#fff',
                                         font: { size: 14 }
                                     },
-                                    ticks: { color: '#fff' }
+                                    ticks: { color: '#fff' },
+                                    grid: { color: '#fbbf24' },
                                 },
                                 y: {
-                                    ticks: { color: '#fff' }
+                                    ticks: { color: '#fff' },
+                                    grid: { color: '#fbbf24' },
                                 }
                             }
                         } }
