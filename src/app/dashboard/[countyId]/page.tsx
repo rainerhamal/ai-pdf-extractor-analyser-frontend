@@ -275,11 +275,11 @@ export default function Page ()
                             plugins: { legend: { display: false } },
                             scales: {
                                 x: {
-                                    grid: { color: '#fbbf24' },
+                                    grid: { color: '#d1d5db' }, // light gray
                                     ticks: { color: '#fff' },
                                 },
                                 y: {
-                                    grid: { color: '#fbbf24' },
+                                    grid: { color: '#d1d5db' }, // light gray
                                     ticks: { color: '#fff' },
                                 },
                             },
@@ -363,12 +363,12 @@ export default function Page ()
                             x: {
                                 stacked: true,
                                 ticks: { color: "#fff" },
-                                grid: { color: '#fbbf24' },
+                                grid: { color: '#d1d5db' }, // light gray
                             },
                             y: {
                                 stacked: true,
                                 ticks: { color: "#fff" },
-                                grid: { color: '#fbbf24' },
+                                grid: { color: '#d1d5db' }, // light gray
                                 beginAtZero: true,
                                 title: {
                                     display: true,
@@ -413,12 +413,12 @@ export default function Page ()
                                     color: "#fff",
                                     callback: ( value ) => `${ minYear + Number( value ) }`,
                                 },
-                                grid: { color: '#fbbf24' },
+                                grid: { color: '#d1d5db' }, // light gray
                             },
                             y: {
                                 stacked: true,
                                 ticks: { color: "#fff" },
-                                grid: { color: '#fbbf24' },
+                                grid: { color: '#d1d5db' }, // light gray
                             },
                         },
                     } }
@@ -459,7 +459,7 @@ export default function Page ()
                                         color: "#fff",
                                         font: { size: 14 },
                                     },
-                                    grid: { color: '#fbbf24' },
+                                    grid: { color: '#d1d5db' }, // light gray
                                 },
                                 y: {
                                     ticks: {
@@ -486,7 +486,7 @@ export default function Page ()
                                             return lines;
                                         },
                                     },
-                                    grid: { color: '#fbbf24' },
+                                    grid: { color: '#d1d5db' }, // light gray
                                 },
                             },
                         } }
@@ -513,11 +513,11 @@ export default function Page ()
                                         font: { size: 14 }
                                     },
                                     ticks: { color: '#fff' },
-                                    grid: { color: '#fbbf24' },
+                                    grid: { color: '#d1d5db' }, // light gray
                                 },
                                 y: {
                                     ticks: { color: '#fff' },
-                                    grid: { color: '#fbbf24' },
+                                    grid: { color: '#d1d5db' }, // light gray
                                 }
                             }
                         } }
