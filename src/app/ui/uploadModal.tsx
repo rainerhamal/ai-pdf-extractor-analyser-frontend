@@ -1,12 +1,12 @@
 import UploadPdf from "./uploadPdf";
 
 type UploadModalProps = {
-    onUploadComplete: ( newFileId: string ) => void;
+    // onUploadComplete: () => void;
     isOpen: boolean;
     onClose: () => void;
 };
 
-export default function UploadModal ( { onUploadComplete, isOpen, onClose }: UploadModalProps )
+export default function UploadModal ( { isOpen, onClose }: UploadModalProps )
 {
     if ( !isOpen ) return null;
     return (
@@ -19,7 +19,10 @@ export default function UploadModal ( { onUploadComplete, isOpen, onClose }: Upl
                         </svg>
                     </button>
                 </div>
-                <UploadPdf onUploadComplete={ onUploadComplete } />
+                <UploadPdf
+                    // onUploadComplete={ onUploadComplete }
+                    redirectOnSuccess={ true }
+                />
             </div>
         </div>
     )

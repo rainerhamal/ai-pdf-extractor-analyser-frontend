@@ -6,16 +6,19 @@ import axios from "axios";
 
 interface UploadPdfProps
 {
-    onUploadComplete?: ( fileId: string ) => void; // for dashboard modal
+    onUploadComplete?: ( countyId: string ) => void; // for dashboard modal
     redirectOnSuccess?: boolean; // for homepage
 }
+
+type County = { id: string; county_name: string };
 
 export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = false }: UploadPdfProps )
 {
     const router = useRouter();
     const [ isUploading, setIsUploading ] = useState( false );
     const [ file, setFile ] = useState<File | null>( null );
-    const [ counties, setCounties ] = useState<string[]>( [] );
+    const [ reportId, setReportId ] = useState<string | null>( null );
+    const [counties, setCounties] = useState<County[]>([]);
     const [ showCountyModal, setShowCountyModal ] = useState<boolean>( false );
     // Add a state for modal animation
     const [ modalVisible, setModalVisible ] = useState( false );
@@ -39,9 +42,11 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
 
         try
         {
-            const response = await axios.post( "/api/upload", {
-                headers: { "Content-Type": "multipart/form-data" }
-            } );
+            const response = await axios.post(
+                "http://localhost:8000/api/upload",
+                formData,
+                { headers: { "Content-Type": "multipart/form-data" } }
+            );
 
             if ( response.status !== 200 )
             {
@@ -50,13 +55,18 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
 
             const data = response.data;
 
+            setReportId( data.reportId )
+
+            console.log( "Upload response:", data );
+
             if ( data.status === "multiple_counties_found" )
             {
                 setCounties( data.counties );
                 setShowCountyModal( true );
             } else
             {
-                handleSuccess( data.fileId );
+                setCounties( data.counties );
+                handleSuccess(data.counties[0]?.id);;
             }
         } catch ( error )
         {
@@ -68,22 +78,11 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
         }
     }
 
-    const selectCounty = async ( county: string ) =>
+    const selectCounty = async ( county: County ) =>
     {
-        try
-        {
-            const response = await axios.post( `/api/select-county?county=${ encodeURIComponent( county ) }`,
-                { fileName: file?.name },
-                { headers: { "Content-Type": "application/json" } },
-            );
-
-            if ( response.status !== 200 )
-            {
-                throw new Error( "Failed to select county" );
-            }
+        try {
             
-            const data = response.data;
-            handleSuccess( data.fileId );
+            handleSuccess(county.id);
 
         } catch ( error )
         {
@@ -92,14 +91,15 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
         }
     }
 
-    const handleSuccess = ( fileId: string ) =>
+    const handleSuccess = ( countyId: string ) =>
     {
+        console.log( "File uploaded successfully with ID:", countyId );
         if ( redirectOnSuccess )
         {
-            router.push( `/dashboard/${ fileId }` );
+            router.push( `/dashboard/${ countyId }` );
         } else if ( onUploadComplete )
         {
-            onUploadComplete( fileId );
+            onUploadComplete( countyId );
         }
     }
 
@@ -139,12 +139,12 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
                         </p>
                         <div className="overflow-y-auto max-h-[18rem]">
                             { counties.map( ( county ) => (
-                                <div key={ county }>
+                                <div key={ county.id }>
                                     <button
                                         className="w-full text-left p-2 text-lg hover:bg-gray-100 rounded"
                                         onClick={ () => selectCounty( county ) }
                                     >
-                                        { county }
+                                        { county.county_name }
                                     </button>
                                 </div>
                             ) ) }

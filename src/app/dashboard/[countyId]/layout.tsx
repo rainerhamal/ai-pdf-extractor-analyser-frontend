@@ -1,24 +1,24 @@
 'use client';
 
-import SideNav from "../ui/dashboard/sidenav";
-import UploadModal from "../ui/uploadModal";
+import SideNav from "../../ui/dashboard/sidenav";
+import UploadModal from "../../ui/uploadModal";
 import { useState } from "react";
-import { FileIdContext } from "../ui/fileIdContext";
+import { FileIdContext } from "../../ui/fileIdContext";
 
 export default function Layout ( { children }: { children: React.ReactNode; } )
 {
     const [ isUploadOpen, setIsUploadOpen ] = useState( false );
-    const [ fileId, setFileId ] = useState<string | null>( null );
+    // const [ fileId, setFileId ] = useState<string | null>( null );
     const handleOpenUploadModal = () => setIsUploadOpen( true );
 
-    const handleNewUpload = ( newFileId: string ) =>
-    {
-        setFileId( newFileId );
-        setIsUploadOpen( false );
-    }
+    // const handleNewUpload = () =>
+    // {
+    //     // setFileId( newFileId );
+    //     setIsUploadOpen( false );
+    // }
 
     return (
-        <FileIdContext.Provider value={ fileId }>
+        // <FileIdContext.Provider value={ fileId }>
             <div className="flex min-h-screen flex-col p-6 bg-gray-900">
                 <div className="flex h-20 shrink-0 items-end rounded-lg bg-gray-700/25 p-4 md:h-20">
                     <SideNav onOpenUploadModal={ handleOpenUploadModal } />
@@ -28,10 +28,10 @@ export default function Layout ( { children }: { children: React.ReactNode; } )
                     <UploadModal
                         isOpen={ isUploadOpen }
                         onClose={ () => setIsUploadOpen( false ) }
-                        onUploadComplete={ handleNewUpload }
+                        // onUploadComplete={ handleNewUpload }
                     />
                 </div>
             </div>
-        </FileIdContext.Provider>
+        // </FileIdContext.Provider>
     );
 }
