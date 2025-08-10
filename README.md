@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI PDF Extractor & Analyser Frontend
 
-## Getting Started
+This is a Next.js frontend for uploading, extracting, and visualizing data from EPA PDF reports. It connects to a FastAPI backend for PDF parsing and data extraction.
 
-First, run the development server:
+## Features
+- Upload EPA PDF reports and extract structured data
+- Visualize extracted data (Goals, BMPs, Implementation, Monitoring, Outreach, Geographic Areas)
+- Export dashboard as PDF or CSV
+- Responsive, modern UI with Tailwind CSS
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech Stack
+- **Next.js** (App Router, React 18, TypeScript)
+- **Chart.js** & **react-chartjs-2** (visualizations)
+- **Tailwind CSS** (styling)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup Instructions
+1. **Install dependencies:**
+	```sh
+	npm install
+	```
+2. **Start the development server:**
+	```sh
+	npm run dev
+	```
+3. **Configure backend API:**
+	- Update API URLs in the code if your FastAPI backend runs on a different host/port.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
+- Upload a PDF via the dashboard navigation.
+- View extracted data and interactive charts by county.
+- Use the navigation panel to export the dashboard as PDF or CSV.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Exporting Data
+- **PDF Export:** Click "Export as PDF" in the navigation panel to save the current dashboard as a PDF.
+- **CSV Export:** (If enabled) Click "Export as CSV" to download all extracted data in CSV format.
 
-## Learn More
+## Deployment
+- Build for production: `npm run build`
+- Start in production: `npm start`
+- Deploy on Vercel, Netlify, or any Node.js-compatible host.
 
-To learn more about Next.js, take a look at the following resources:
+---
+For backend setup and extraction logic, see the FastAPI repo and the EXTRACTION_LOGIC.md file.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Author
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Rainer Hamal

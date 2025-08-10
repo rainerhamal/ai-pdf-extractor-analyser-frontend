@@ -18,7 +18,7 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
     const [ isUploading, setIsUploading ] = useState( false );
     const [ file, setFile ] = useState<File | null>( null );
     const [ reportId, setReportId ] = useState<string | null>( null );
-    const [counties, setCounties] = useState<County[]>([]);
+    const [ counties, setCounties ] = useState<County[]>( [] );
     const [ showCountyModal, setShowCountyModal ] = useState<boolean>( false );
     // Add a state for modal animation
     const [ modalVisible, setModalVisible ] = useState( false );
@@ -43,7 +43,7 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
         try
         {
             const response = await axios.post(
-                "http://localhost:8000/api/upload",
+                `${ process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000" }/api/upload`,
                 formData,
                 { headers: { "Content-Type": "multipart/form-data" } }
             );
@@ -66,7 +66,7 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
             } else
             {
                 setCounties( data.counties );
-                handleSuccess(data.counties[0]?.id);;
+                handleSuccess( data.counties[ 0 ]?.id );;
             }
         } catch ( error )
         {
@@ -80,9 +80,10 @@ export default function UploadPdf ( { onUploadComplete, redirectOnSuccess = fals
 
     const selectCounty = async ( county: County ) =>
     {
-        try {
-            
-            handleSuccess(county.id);
+        try
+        {
+
+            handleSuccess( county.id );
 
         } catch ( error )
         {

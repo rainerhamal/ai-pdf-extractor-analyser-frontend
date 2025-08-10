@@ -46,7 +46,7 @@ export default function Page ()
 
     useEffect( () =>
     {
-        fetch( `http://localhost:8000/api/counties/${ countyId }` )
+        fetch( `${ process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000" }/api/counties/${ countyId }` )
             .then( ( res ) => res.json() )
             .then( ( data ) => setData( data ) )
             .catch( ( err ) => console.error( "Error fetching county data:", err ) );
@@ -215,7 +215,7 @@ export default function Page ()
             >
                 Export Data as JSON
             </button>
-            
+
             <h1 className={ `${ lusitana.className } mb-6 text-2xl` }>
                 { data.county_name } - Overview
             </h1>
